@@ -1,12 +1,35 @@
 #!/usr/bin/env node
 
-import { fetchGithubActivity } from "../controllers/gitHubController.js";
+import { handleCommand } from '../controllers/gitHubController.js';
 
-const [username] = process.argv.slice(2);
+const [command, ...args] = process.argv.slice(2);
 
-if (!username) {
-    console.error("Please provide a GitHub username.");
-    process.exit(1);
+function showHelp() {
+    console.log(`
+Usage: gac <command> [options]
+
+Commands:
+  add-alias <alias> <username>   Add a new alias for a GitHub username
+  info <username>                Display information about a GitHub user
+  save <filename> <filter>       Save filtered activity to a file
+  filter <filter>               Display filtered activity in the terminal
+  history                       Show command history
+  activity <username>           Fetch and display recent activity
+
+Options:
+  -h, --help  Show help
+`);
 }
 
-fetchGithubActivity(username);
+if (command === '--help' || command === '-h') {
+    showHelp();
+    process.exit(0);
+}
+
+try {
+    handleCommand(command, args);
+} catch (error) {
+    console.error(`Error: ${error.message}`);
+    showHelp();
+    process.exit(1);
+}
