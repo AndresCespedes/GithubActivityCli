@@ -1,6 +1,6 @@
 import { fetchUserActivity, fetchUserInfo } from '../utils/apiUtils.js';
 import { addAlias, resolveAlias } from '../utils/userUtils.js';
-import { saveToFile, readHistory } from '../utils/fileUtils.js';
+import { saveToFile, readHistory, appendToHistory } from '../utils/fileUtils.js';
 import { filterActivities } from '../utils/apiUtils.js';
 
 export async function handleCommand(command, args) {
@@ -17,14 +17,12 @@ export async function handleCommand(command, args) {
             displayUserInfo(userInfo);
             break;
         case 'save':
-            //todo -> revisar
-            validateArgs(args, 2);
-            const [filename, filter] = args;
-            const activityToSave = await fetchUserActivity(username, filter);
+            validateArgs(args, 3);
+            const [userName, filename, filter] = args;
+            const activityToSave = await fetchUserActivity(userName, filter);
             const filteredActivity = filterActivities(activityToSave, filter);
             saveToFile(filename, filteredActivity);
             break;
-            //todo -> revisar
         case 'filter':
             validateArgs(args, 2);
             const activities = await fetchUserActivity(username);
