@@ -6,14 +6,14 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const historyFilePath = path.join(__dirname, '..', 'data', 'activityHistory.json');
+const historyFilePath = path.join(__dirname, '../../', 'data', 'history.json');
 
 export function saveToFile(filename, data) {
     try {
         if (data === undefined || data === null) {
             throw new Error('Data to save is undefined or null');
         }
-        fs.writeFileSync(path.join(__dirname, '..', 'data', filename), JSON.stringify(data, null, 2));
+        fs.writeFileSync(path.join(__dirname, '../../', 'data', filename), JSON.stringify(data, null, 2));
         console.log(`Data saved to ${filename}`);
     } catch (error) {
         console.error(`Failed to save data to file: ${error.message}`);
