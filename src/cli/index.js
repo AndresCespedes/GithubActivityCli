@@ -9,12 +9,12 @@ function showHelp() {
 Usage: gac <command> [options]
 
 Commands:
-  add-alias <alias> <username>   Add a new alias for a GitHub username
-  info <username>                Display information about a GitHub user
-  save <filename> <filter>       Save filtered activity to a file
-  filter <filter>               Display filtered activity in the terminal
-  history                       Show command history
-  activity <username>           Fetch and display recent activity
+  add-alias <alias> <username>              Add a new alias for a GitHub username
+  info <username>                           Display information about a GitHub user
+  save <username> <filename> <filter>       Save filtered activity to a file
+  filter <filter>                           Display filtered activity in the terminal
+  history                                   Show command history
+  activity <username>                       Fetch and display recent activity
 
 Options:
   -h, --help  Show help
